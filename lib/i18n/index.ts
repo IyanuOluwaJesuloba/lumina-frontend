@@ -27,21 +27,6 @@ import {
 
 export const CATALOGUES: Record<string, MessageCatalogue> = { en, de };
 
-const pluralRulesCache = new Map<string, Intl.PluralRules>();
-
-function getPluralRules(locale: string): Intl.PluralRules {
-  let rules = pluralRulesCache.get(locale);
-  if (!rules) {
-    try {
-      rules = new Intl.PluralRules(locale);
-    } catch {
-      rules = new Intl.PluralRules("en");
-    }
-    pluralRulesCache.set(locale, rules);
-  }
-  return rules;
-}
-
 let activeCatalogue: MessageCatalogue = en;
 let activeLocale = "en";
 
