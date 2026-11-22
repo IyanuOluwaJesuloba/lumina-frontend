@@ -161,6 +161,17 @@ export interface MessageCatalogue {
   "owner.withdrawBlockerActive": string;
   "owner.withdrawBlockerLocked": string;
   "owner.withdrawBlockerNoStake": string;
+  "owner.staked": string;
+  "owner.ledgerPrefix": string;
+  "owner.slashHistoryRetryHint": string;
+  "owner.retrySlashHistory": string;
+
+  // ── Registry event labels ─────────────────────────────────────────────
+  "registryEvent.registered": string;
+  "registryEvent.deactivated": string;
+  "registryEvent.metadataUpdated": string;
+  "registryEvent.ownershipTransferred": string;
+  "registryEvent.unknown": string;
 
   // ── Soroban transaction pipeline ──────────────────────────────────────
   "soroban.couldNotPrepare": string;

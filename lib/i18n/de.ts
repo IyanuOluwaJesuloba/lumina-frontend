@@ -193,6 +193,18 @@ const de: MessageCatalogue = {
   "owner.withdrawBlockerLocked":
     "Ein Slash ist kürzlich gelandet, daher ist die Auszahlung bis zu Ledger {until} gesperrt (aktuell {current}, noch {remaining}).",
   "owner.withdrawBlockerNoStake": "Es gibt keinen Einsatz zum Abheben.",
+  "owner.staked": "Eingesetzt",
+  "owner.ledgerPrefix": "Ledger",
+  "owner.slashHistoryRetryHint":
+    "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "owner.retrySlashHistory": "Slash-Verlauf erneut laden",
+
+  // ── Registry event labels ─────────────────────────────────────────────
+  "registryEvent.registered": "Registriert",
+  "registryEvent.deactivated": "Deaktiviert",
+  "registryEvent.metadataUpdated": "Metadaten aktualisiert",
+  "registryEvent.ownershipTransferred": "Eigentum übertragen",
+  "registryEvent.unknown": "Registry-Ereignis",
 
   // ── Soroban transaction pipeline ──────────────────────────────────────
   "soroban.couldNotPrepare": "Die Transaktion konnte nicht vorbereitet werden.",
