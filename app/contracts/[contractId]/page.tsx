@@ -17,6 +17,7 @@ import WatchIndicator from "@/components/WatchIndicator";
 import SorobanValue from "@/components/SorobanValue";
 import SharedWasmContracts from "@/components/SharedWasmContracts";
 import ViewTracker from "@/components/ViewTracker";
+import { ContractActions } from "@/components/ContractActions";
 
 export const dynamic = "force-dynamic";
 
@@ -117,6 +118,7 @@ export default async function ContractPage({
         </h1>
         <CopyAddressButton address={contractId} variant="hash" />
         <WatchIndicator address={contractId} />
+        <ContractActions contract={contractInterface} contractId={contractId} />
       </div>
       <p className="text-[var(--color-text-muted)] text-[13px] mb-6">
         Soroban contract interface and storage

@@ -20,6 +20,7 @@ import TimeAgo from "@/components/TimeAgo";
 import ViewTracker from "@/components/ViewTracker";
 import TransactionPreconditions from "@/components/TransactionPreconditions";
 import IndexingGapIndicator from "@/components/IndexingGapIndicator";
+import { TransactionActions } from "@/components/TransactionActions";
 
 export const dynamic = "force-dynamic";
 
@@ -113,6 +114,7 @@ export default async function TransactionPage({
               {transaction.hash}
             </h1>
             <CopyAddressButton address={transaction.hash} variant="hash" />
+            <TransactionActions transaction={transaction} />
           </div>
           <p className="text-[var(--color-text-muted)] text-[13px] mb-6">
             Included in ledger{" "}
