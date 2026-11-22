@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import {
   AccountDetailDocument as ACCOUNT_QUERY,
+  AccountAsOfLedgerDocument as ACCOUNT_AS_OF_QUERY,
   AccountTrustlineOpsDocument as TRUSTLINE_QUERY,
   AccountLifecycleDocument,
+  type AccountAsOfLedgerQuery,
   type AccountLifecycleQuery,
   AccountTradesDocument as ACCOUNT_TRADES_QUERY,
   type AccountTradesQuery,
@@ -11,6 +13,8 @@ import { gqlFetch, GRAPHQL_URL } from "@/lib/graphql";
 import { accountOgImage, routeMetadata } from "@/lib/metadata";
 import type { Account, TrustlineOp } from "@/lib/types";
 import { formatXLM, truncateAddress } from "@/lib/formatters";
+import { parseAsOfLedger } from "@/lib/asOfLedger";
+import AccountAsOfLedger from "@/components/AccountAsOfLedger";
 import CopyAddressButton from "@/components/CopyAddressButton";
 import WatchIndicator from "@/components/WatchIndicator";
 import AccountActivityFeed from "@/components/AccountActivityFeed";
@@ -57,6 +61,29 @@ async function getAccount(
 ): Promise<{ account: Account | null; unavailable: boolean }> {
   try {
     const data = await gqlFetch(GRAPHQL_URL, ACCOUNT_QUERY, { address });
+    return { account: data.account, unavailable: false };
+  } catch {
+    return { account: null, unavailable: true };
+  }
+}
+
+/** The fields a recorded state carries; the live account has these and more. */
+type AccountSnapshot = NonNullable<AccountAsOfLedgerQuery["account"]>;
+
+/**
+ * The account as Lumina last recorded it at or before `ledger`. Stored history
+ * only: null means no recorded state, and the API never falls back to the
+ * current one, which would answer a past question with today's balances.
+ */
+async function getAccountAsOf(
+  address: string,
+  ledger: number,
+): Promise<{ account: AccountSnapshot | null; unavailable: boolean }> {
+  try {
+    const data = await gqlFetch(GRAPHQL_URL, ACCOUNT_AS_OF_QUERY, {
+      address,
+      asOfLedger: ledger,
+    });
     return { account: data.account, unavailable: false };
   } catch {
     return { account: null, unavailable: true };
@@ -110,8 +137,13 @@ const statValue = "mono text-sm mt-1";
 
 export default async function AccountPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ address: string }>;
+  searchParams?: Promise<{
+    ledger?: string | string[];
+    network?: string | string[];
+  }>;
 }) {
   const { address } = await params;
   const [result, trustlineOps, lifecycleResult, tradesResult] = await Promise.all([
@@ -120,7 +152,10 @@ export default async function AccountPage({
     getAccountLifecycle(address),
     getAccountTrades(address),
   ]);
-  const account = result.account;
+  const result = live ?? pinned ?? { account: null, unavailable: false };
+  const account: AccountSnapshot | null = result.account;
+  // Only the live account carries its recent activity.
+  const liveAccount = live?.account ?? null;
 
   const flagTags = account
     ? [
@@ -132,7 +167,7 @@ export default async function AccountPage({
     : [];
   if (account && flagTags.length === 0) flagTags.push("No Special Flags");
 
-  const isMerged = !!lifecycleResult.lifecycle?.mergedIntoAddress;
+  const isMerged = !!lifecycleResult?.lifecycle?.mergedIntoAddress;
 
   return (
     <div className="max-w-[1160px] mx-auto px-4 sm:px-7 py-12">
@@ -153,20 +188,33 @@ export default async function AccountPage({
       />
       {result.unavailable ? (
         <BackendUnavailable />
-      ) : !account ? (
-        <div className="p-8 rounded-xl border border-[var(--color-error-outline)] text-center">
-          <p className="text-[var(--color-error-text)] font-semibold mb-2">
-            Account Not Found
-          </p>
-          <p className="text-[var(--color-text-muted)] text-sm max-w-md mx-auto">
-            The address{" "}
-            <span className="mono text-[var(--color-text-secondary)] break-all">
-              {address}
-            </span>{" "}
-            does not exist on Stellar Mainnet, or has never been funded.
-            Check the address and network, or fund the account before looking it up again.
-          </p>
+      ) : !account && !isCurrent ? (
+        // Pinned to a ledger with no recorded state, or to a value that is not
+        // a ledger: the control explains which, and offers another try.
+        <div>
+          <h1 className="mono font-bold text-[22px] break-all text-[var(--color-text-primary)] mb-4">
+            {address}
+          </h1>
+          <AccountAsOfLedger address={address} view={asOf} network={network} />
         </div>
+      ) : !account ? (
+        <>
+          <div className="p-8 rounded-xl border border-[var(--color-error-outline)] text-center mb-8">
+            <p className="text-[var(--color-error-text)] font-semibold mb-2">
+              Account Not Found
+            </p>
+            <p className="text-[var(--color-text-muted)] text-sm max-w-md mx-auto">
+              The address{" "}
+              <span className="mono text-[var(--color-text-secondary)] break-all">
+                {address}
+              </span>{" "}
+              does not exist on Stellar Mainnet, or has never been funded.
+              Check the address and network, or fund the account before looking it up again.
+            </p>
+          </div>
+          {/* A merged account no longer exists, but its recorded past may. */}
+          <AccountAsOfLedger address={address} view={asOf} network={network} />
+        </>
       ) : (
         <div>
           <div className="flex items-center gap-3 mb-1.5 flex-wrap">
@@ -185,6 +233,13 @@ export default async function AccountPage({
             Last modified at ledger{" "}
             {account.lastModifiedLedger.toLocaleString()}
           </p>
+
+          <AccountAsOfLedger
+            address={address}
+            view={asOf}
+            recordedLedger={account.lastModifiedLedger}
+            network={network}
+          />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <div className={stat}>
@@ -283,15 +338,15 @@ export default async function AccountPage({
             />
           )}
 
-          <AccountActivityFeed address={account.address} />
+              <AccountActivityFeed address={account.address} />
 
-          <h2 className="font-extrabold text-base mb-3 text-[var(--color-text-primary)]">
-            Recent Transactions
-          </h2>
-          <AccountTransactionList
-            address={account.address}
-            initial={account.transactions ?? []}
-          />
+              <h2 className="font-extrabold text-base mb-3 text-[var(--color-text-primary)]">
+                Recent Transactions
+              </h2>
+              <AccountTransactionList
+                address={account.address}
+                initial={liveAccount.transactions ?? []}
+              />
 
           <h2 className="font-extrabold text-base mt-9 mb-3 text-[var(--color-text-primary)]">
             Trades
@@ -316,21 +371,23 @@ export default async function AccountPage({
             initial={account.operations ?? []}
           />
 
-          <h2 className="font-extrabold text-base mt-9 mb-3 text-[var(--color-text-primary)]">
-            Trustline History
-          </h2>
-          {trustlineOps.unavailable ? (
-            <p role="alert" className="text-sm text-[var(--color-error-text)]">
-              Trustline history is unavailable. Check your connection and refresh this page to try again.
-            </p>
-          ) : (
-            <AccountTrustlineTimeline address={account.address} initial={trustlineOps.items} />
-          )}
+              <h2 className="font-extrabold text-base mt-9 mb-3 text-[var(--color-text-primary)]">
+                Trustline History
+              </h2>
+              {trustlineOps?.unavailable ? (
+                <p role="alert" className="text-sm text-[var(--color-error-text)]">
+                  Trustline history is unavailable. Check your connection and refresh this page to try again.
+                </p>
+              ) : (
+                <AccountTrustlineTimeline address={account.address} initial={trustlineOps?.items ?? []} />
+              )}
 
-          {!lifecycleResult.unavailable && lifecycleResult.lifecycle && (
-            <div className="mt-9">
-              <AccountLifecycleSection lifecycle={lifecycleResult.lifecycle} />
-            </div>
+              {lifecycleResult?.lifecycle && (
+                <div className="mt-9">
+                  <AccountLifecycleSection lifecycle={lifecycleResult.lifecycle} />
+                </div>
+              )}
+            </>
           )}
         </div>
       )}
