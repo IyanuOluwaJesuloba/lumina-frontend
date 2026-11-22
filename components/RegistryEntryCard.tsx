@@ -7,15 +7,12 @@
  * per-contract read, so it is fetched the first time the section is expanded
  * rather than for every row up front.
  */
-import type { RegistryProfile } from "@/lib/registry";
-import RegistrySlashHistory from "./RegistrySlashHistory";
-import { CATEGORY_LABELS } from "@/lib/registry";
-import {
-  LifetimeSlashedBadge,
-  StakeBadge,
-  VerifiedBadge,
-} from "./RegistryBadges";
-import ContractLink from "./ContractLink";
+import type { RegistryProfile } from '@/lib/registry';
+import RegistrySlashHistory from './RegistrySlashHistory';
+import { CATEGORY_LABELS } from '@/lib/registry';
+import { LifetimeSlashedBadge, StakeBadge, VerifiedBadge } from './RegistryBadges';
+import ContractLink from './ContractLink';
+import { t } from '@/lib/i18n';
 
 export interface RegistryEntryCardProps {
   profile: RegistryProfile;
@@ -40,11 +37,8 @@ export default function RegistryEntryCard({ profile }: RegistryEntryCardProps) {
         {profile.description}
       </p>
       {profile.categories && profile.categories.length > 0 && (
-        <ul
-          className="flex flex-wrap gap-1.5 mt-2 list-none p-0 m-0"
-          aria-label="Categories"
-        >
-          {profile.categories.map((category) => (
+        <ul className="flex flex-wrap gap-1.5 mt-2 list-none p-0 m-0" aria-label={t("registryEntryCard.categories")}>
+          {profile.categories.map(category => (
             <li
               key={category}
               className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[var(--color-accent-surface)] text-[var(--color-accent-text)]"
