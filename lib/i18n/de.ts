@@ -433,107 +433,194 @@ const de: MessageCatalogue = {
 
   // ── SearchBar ─────────────────────────────────────────────────────────
   "searchBar.placeholder": "Konto, Transaktion, Vertrag oder Memo suchen\u2026",
+  // ── Developer portal ──────────────────────────────────────────────────
+  "devPortal.heading": "Lumina Developer Portal",
+  "devPortal.description":
+    "Alles, was Sie brauchen, um die Stellar-API von Lumina in Ihre Anwendung zu integrieren. Von Ihrer ersten Abfrage bis zum Produktions-Monitoring.",
+  "devPortal.gettingStarted.title": "Erste Schritte",
+  "devPortal.gettingStarted.description":
+    "Schritt-für-Schritt-Anleitung für Ihre erste API-Anfrage. Lernen Sie Authentifizierung, Paginierung und Fehlerbehandlung mit Copy-Paste-Codebeispielen.",
+  "devPortal.gettingStarted.cta": "Loslegen →",
+  "devPortal.apiDocs.title": "API-Dokumentation",
+  "devPortal.apiDocs.description":
+    "Entdecken Sie das GraphQL-Schema mit ausgearbeiteten Beispielen, die Sie live ausführen können. Verstehen Sie Paginierungsmuster und Fehlerbehandlung im Detail.",
+  "devPortal.apiDocs.cta": "Docs erkunden →",
+  "devPortal.playground.title": "Abfrage-Playground",
+  "devPortal.playground.description":
+    "Schreiben Sie GraphQL-Abfragen und generieren Sie Client-Code in JavaScript und Python. Testen Sie Ihre Abfragen live gegen die echte API.",
+  "devPortal.playground.cta": "Playground öffnen →",
+  "devPortal.usage.title": "Nutzungs-Dashboard",
+  "devPortal.usage.description":
+    "Überwachen Sie die Nutzung Ihrer API-Schlüssel und Ihres Kontingents. Sehen Sie Anfragezahlen und Trends im Zeitverlauf.",
+  "devPortal.usage.cta": "Dashboard ansehen →",
+  "devPortal.webhooks.title": "Webhooks",
+  "devPortal.webhooks.description":
+    "Registrieren Sie Webhooks für Echtzeit-Ereignisbenachrichtigungen. Überwachen Sie Zustellversuche und testen Sie Ihre Endpunkte.",
+  "devPortal.webhooks.cta": "Webhooks verwalten →",
+  "devPortal.quickStart.title": "Schnellstart",
+  "devPortal.quickStart.before": "Neu bei Lumina? Schauen Sie sich unseren",
+  "devPortal.quickStart.link": "Erste-Schritte-Leitfaden",
+  "devPortal.quickStart.after":
+    "an, um die Grundlagen zu lernen. In wenigen Minuten führen Sie Abfragen auf der Stellar-Blockchain aus.",
+  "devPortal.step1.action": "Stellen Sie eine Anfrage",
+  "devPortal.step1.rest":
+    "mit unserem Playground oder Ihrer bevorzugten Sprache",
+  "devPortal.step2.action": "Generieren Sie Code",
+  "devPortal.step2.rest": "in JavaScript oder Python für Ihre Anwendung",
+  "devPortal.step3.action": "Überwachen Sie die Nutzung",
+  "devPortal.step3.rest": "in Ihrem Dashboard",
 
-  // ── WalletInfo ────────────────────────────────────────────────────────
-  "walletInfo.disconnect": "Trennen",
-  "walletInfo.disconnecting": "Wird getrennt…",
-  "walletInfo.disconnectLabel": "Wallet trennen",
+  // ── Getting started guide ─────────────────────────────────────────────
+  "guide.heading": "Erste Schritte mit Lumina",
+  "guide.subtitle":
+    "Erfahren Sie, wie Sie in nur wenigen Minuten Ihre erste GraphQL-Abfrage stellen.",
+  "guide.step1.title": "Stellen Sie Ihre erste Anfrage",
+  "guide.step1.before": "Die Lumina GraphQL-API ist verfügbar unter",
+  "guide.step1.after":
+    ". Beginnen Sie mit dieser einfachen Abfrage, die den neuesten Ledger abruft:",
+  "guide.step1.hint":
+    "Kopieren Sie den obigen Code und führen Sie ihn in Ihrem Terminal aus. Sie sollten die neuesten Stellar-Ledger-Informationen sehen.",
+  "guide.example.firstRequest": "Erste Anfrage",
+  "guide.example.pagination": "Abfrage mit Paginierung",
+  "guide.step2.title": "Mit Paginierung arbeiten",
+  "guide.step2.intro":
+    "Bei Abfragen, die mehrere Einträge zurückgeben, verwenden wir cursor-basierte Paginierung.",
+  "guide.step2.response":
+    "Die Antwort enthält ein pageInfo-Objekt mit den Feldern hasNextPage und cursor:",
+  "guide.step2.nextTitle": "So laden Sie die nächste Seite:",
+  "guide.step2.nextBefore":
+    "Um die nächste Ergebnisseite zu erhalten, übergeben Sie den",
+  "guide.step2.nextAfter": "aus der vorherigen Antwort an die nächste Abfrage:",
+  "guide.step3.title": "Fehler abfangen",
+  "guide.step3.before":
+    "Die GraphQL-API gibt auch bei Fehlern HTTP 200 zurück — prüfen Sie das",
+  "guide.step3.after": "Array in der Antwort:",
+  "guide.errors.title": "Häufige Fehler:",
+  "guide.errors.invalidQuery": "Ungültige Abfrage",
+  "guide.errors.invalidQueryBefore":
+    "Ihre GraphQL-Syntax ist ungültig. Prüfen Sie den",
+  "guide.errors.invalidQueryLink": "Playground",
+  "guide.errors.invalidQueryAfter": "für das korrekte Schema.",
+  "guide.errors.notFound": "Nicht gefunden",
+  "guide.errors.notFoundDesc":
+    "Die Ressource existiert nicht (z. B. ein Konto, das auf Stellar noch nicht aufgeladen wurde).",
+  "guide.errors.serverError": "Serverfehler",
+  "guide.errors.serverErrorDesc":
+    "Unser Backend ist vorübergehend nicht verfügbar. Wiederholen Sie es mit exponentiellem Backoff.",
+  "guide.errorHandling.title": "Muster zur Fehlerbehandlung",
+  "guide.step4.title": "Das Schema erkunden",
+  "guide.step4.before": "Besuchen Sie den",
+  "guide.step4.link": "GraphQL Playground",
+  "guide.step4.after":
+    ", um alle verfügbaren Abfragen und Datentypen zu erkunden. Der Playground enthält ausgearbeitete Beispiele, die Sie live gegen die API ausführen können.",
+  "guide.step4.popularLabel": "Beliebte Abfragen:",
+  "guide.step4.popularItems":
+    "Letzte Transaktionen, Kontostände, Vertragsereignisse, Asset-Informationen, Zahlungsverlauf",
+  "guide.next.title": "Wie geht es weiter?",
+  "guide.next.tryPlayground.label": "Playground ausprobieren:",
+  "guide.next.tryPlayground.link": "Live-Abfragen ausführen",
+  "guide.next.readDocs.label": "Docs lesen:",
+  "guide.next.readDocs.link":
+    "Tauchen Sie tiefer in Paginierung und Fehlerbehandlung ein",
+  "guide.next.generateCode.label": "Code generieren:",
+  "guide.next.generateCode.text":
+    "Verwenden Sie den Playground, um eine Abfrage zu schreiben, und generieren Sie dann produktionsreifen Code in JavaScript oder Python",
+  "guide.next.monitorUsage.label": "Nutzung überwachen:",
+  "guide.next.monitorUsage.link": "Verfolgen Sie Ihren API-Verbrauch",
 
-  // ── WatchedAddressList ────────────────────────────────────────────────
-  "watchList.heading": "Beobachtete Adressen",
-  "watchList.exportList": "Liste exportieren",
-  "watchList.importList": "Liste importieren",
-  "watchList.importFileLabel": "Watchlist-Datei importieren",
-  "watchList.importTitle": "Watchlist importieren",
-  "watchList.importPrompt":
-    "Wählen Sie, wie die importierten Adressen auf Ihre aktuelle Watchlist angewendet werden:",
-  "watchList.mergeOption": "Zusammenführen (mit bestehenden kombinieren)",
-  "watchList.replaceOption": "Ersetzen (aktuelle Liste überschreiben)",
-  "watchList.confirmImport": "Import bestätigen",
-  "watchList.cancel": "Abbrechen",
-  "watchList.addressLabel": "Zu beobachtende Stellar-Adresse",
-  "watchList.addWatch": "Beobachtung hinzufügen",
-  "watchList.errorEmpty": "Geben Sie eine zu beobachtende Adresse ein.",
-  "watchList.errorInvalid": "Das ist keine Stellar-Konto-ID: {hint}.",
-  "watchList.errorDuplicate":
-    "Diese Adresse steht bereits auf Ihrer Watchlist. Wählen Sie eine andere Adresse oder entfernen Sie zuerst die vorhandene.",
-  "watchList.importFailed":
-    "{error} Überprüfen Sie das Dateiformat und wählen Sie eine gültige Watchlist, um es erneut zu versuchen.",
-  "watchList.importFailedFallback": "Import der Watchlist fehlgeschlagen.",
-  "watchList.listFull":
-    "Die Liste ist auf {count} Adressen begrenzt. Entfernen Sie eine, um eine andere hinzuzufügen.",
-  "watchList.emptyState":
-    "Noch nichts beobachtet. Fügen Sie oben eine Adresse hinzu oder verwenden Sie das Lesezeichen-Symbol neben einem Konto auf der Website.",
-  "watchList.filtersCount":
-    "{count} {count, plural, one {Filter} other {Filter}}",
-  "watchList.unwatch": "{address} nicht mehr beobachten",
-  "watchList.remove": "Entfernen",
+  // ── API documentation ─────────────────────────────────────────────────
+  "apiDocs.heading": "API-Dokumentation",
+  "apiDocs.subtitleBefore":
+    "Entdecken Sie das GraphQL-Schema mit ausgearbeiteten Beispielen, die Sie live gegen die API ausführen können. Alle folgenden Beispiele sind im",
+  "apiDocs.subtitleLink": "GraphQL Playground",
+  "apiDocs.pagination.title": "Paginierungsleitfaden",
+  "apiDocs.pagination.intro":
+    "Alle Listenabfragen in Lumina verwenden cursor-basierte Paginierung. Dieser Ansatz ist für große Datensätze ideal, weil er:",
+  "apiDocs.pagination.bulletScalable.label": "Skalierbar:",
+  "apiDocs.pagination.bulletScalable.desc":
+    "Cursor erfordern keine Offset-Berechnungen",
+  "apiDocs.pagination.bulletStable.label": "Stabil:",
+  "apiDocs.pagination.bulletStable.desc":
+    "Ergebnisse verschieben sich nicht, wenn Einträge hinzugefügt oder entfernt werden",
+  "apiDocs.pagination.bulletEfficient.label": "Effizient:",
+  "apiDocs.pagination.bulletEfficient.desc":
+    "Es ist nicht nötig, frühere Einträge abzurufen und zu überspringen",
+  "apiDocs.pagination.returns": "Jede Listenabfrage gibt Folgendes zurück:",
+  "apiDocs.pagination.next":
+    "Um die nächste Seite zu laden, übergeben Sie den Cursor aus der vorherigen Antwort:",
+  "apiDocs.errors.title": "Fehlerbehandlung",
+  "apiDocs.errors.before": "GraphQL gibt immer HTTP 200 zurück. Prüfen Sie das",
+  "apiDocs.errors.after": "Array auf Probleme:",
+  "apiDocs.errors.success": "Erfolgreiche Antwort",
+  "apiDocs.errors.error": "Fehlerantwort",
+  "apiDocs.errors.checkBefore": "Prüfen Sie immer",
+  "apiDocs.errors.checkMiddle": "bevor Sie auf",
+  "apiDocs.errors.checkAfter": " zugreifen.",
+  "apiDocs.examples.title": "Ausgearbeitete Beispiele",
+  "apiDocs.example.recentTransactions.name": "Letzte Transaktionen",
+  "apiDocs.example.recentTransactions.description":
+    "Ruft die letzten 5 Transaktionen im Netzwerk ab",
+  "apiDocs.example.accountBalances.name": "Kontostände",
+  "apiDocs.example.accountBalances.description":
+    "Ruft alle Asset-Guthaben eines Kontos ab (Adresse unten bearbeiten)",
+  "apiDocs.example.paymentHistory.name": "Zahlungsverlauf",
+  "apiDocs.example.paymentHistory.description":
+    "Ruft Zahlungsoperationen eines Kontos ab (Adresse unten bearbeiten)",
+  "apiDocs.example.contractEvents.name": "Vertragsereignisse",
+  "apiDocs.example.contractEvents.description":
+    "Fragt Soroban-Vertragsereignisse nach Vertragsadresse ab (Vertrags-ID unten bearbeiten)",
+  "apiDocs.tryInPlayground": "Im Playground ausprobieren",
+  "apiDocs.viewDocs": "Docs ansehen",
+  "apiDocs.next.title": "Nächste Schritte",
+  "apiDocs.next.runExample.label": "Beispiel ausführen:",
+  "apiDocs.next.runExample.text":
+    'Klicken Sie auf "{button}", um eines der obigen Beispiele gegen die Live-API auszuführen',
+  "apiDocs.next.modify.label": "Bearbeiten und testen:",
+  "apiDocs.next.modify.text":
+    "Bearbeiten Sie die Abfrage im Playground, um verschiedene Felder und Filter zu erkunden",
+  "apiDocs.next.generate.label": "Code generieren:",
+  "apiDocs.next.generate.text":
+    "Sobald Ihre Abfrage funktioniert, generieren Sie JavaScript- oder Python-Code zur Integration in Ihre App",
 
-  // ── OnboardingTour ────────────────────────────────────────────────────
-  "onTour.welcomeTitle": "Willkommen bei Lumina",
-  "onTour.welcomeSubtitle": "Entdecken wir, was Lumina einzigartig macht",
-  "onTour.closeTour": "Tour schließen",
-  "onTour.stepPosition": "{current} von {total}",
-  "onTour.skip": "Überspringen",
-  "onTour.next": "Weiter",
-  "onTour.done": "Fertig",
-  "onTour.stepExplorerTitle": "Konto-Explorer",
-  "onTour.stepExplorerBody":
-    "Durchsuchen und analysieren Sie jedes Stellar-Konto. Sehen Sie Guthaben, Transaktionsverlauf und Assets im Detail.",
-  "onTour.stepTransactionsTitle": "Alle Transaktionen",
-  "onTour.stepTransactionsBody":
-    "Blättern Sie durch alle Transaktionen im Netzwerk in Echtzeit. Filtern Sie nach Konto, Asset oder Operationstyp.",
-  "onTour.stepEventsTitle": "Vertragsereignisse",
-  "onTour.stepEventsBody":
-    "Überwachen Sie Soroban-Vertragsereignisse. Verfolgen Sie Smart-Contract-Ausführungen und ihre Auswirkungen.",
-  "onTour.stepGraphqlTitle": "GraphQL Playground",
-  "onTour.stepGraphqlBody":
-    "Fragen Sie die Lumina-API direkt ab. Erstellen Sie eigene Abfragen, um genau die benötigten Daten zu erhalten.",
-  "onTour.stepRegistryTitle": "Registry",
-  "onTour.stepRegistryBody":
-    "Registrieren Sie Ihre Soroban-Verträge für die Indizierung. Machen Sie Ihre Verträge für das Netzwerk auffindbar.",
+  // ── Usage dashboard ───────────────────────────────────────────────────
+  "usage.heading": "Nutzungs-Dashboard",
+  "usage.subtitle":
+    "Überwachen Sie die Nutzung Ihrer API-Schlüssel und Ihres Kontingents, geschützt durch Wallet-Eigentum.",
+  "usage.connectedOwner": "Verbundenes Eigentümerkonto",
+  "usage.walletRequired.title": "Wallet-Eigentum erforderlich",
+  "usage.walletRequired.body":
+    "Die Schlüsselverwaltung ist strikt an den Besitz einer Wallet gebunden. Verbinden Sie Ihre Stellar-Wallet, um Ihre privaten API-Schlüssel anzuzeigen, zu erstellen und zu verwalten.",
+  "usage.connecting": "Wallet wird verbunden…",
+  "usage.connectCta": "Wallet verbinden, um auf Schlüssel zuzugreifen",
+  "usage.requestsThisWeek": "Anfragen diese Woche",
+  "usage.peakDay": "Spitzentag: {count} Anfragen",
+  "usage.quotaRemaining": "Verbleibendes Kontingent",
+  "usage.quotaOfTotal": "von {total} insgesamt",
+  "usage.quotaUsage": "Kontingentnutzung",
+  "usage.warning": "Warnung",
+  "usage.requestsOverTime": "Anfragen im Zeitverlauf (letzte 7 Tage)",
+  "usage.byApiKey": "Nutzung nach API-Schlüssel",
+  "usage.keyManagement": "API-Schlüssel-Verwaltung",
+  "usage.keyNamePlaceholder": "Schlüsselname (z. B. Staging-Schlüssel)",
+  "usage.createKey": "API-Schlüssel erstellen",
+  "usage.thKeyName": "Schlüsselname",
+  "usage.thApiKey": "API-Schlüssel",
+  "usage.thCreated": "Erstellt",
+  "usage.thUsage": "Nutzung",
+  "usage.thAction": "Aktion",
+  "usage.percentUsed": "{percent} % verbraucht",
+  "usage.revoke": "Widerrufen",
+  "usage.aboutKeys.title": "Über wallet-geschützte Schlüssel",
+  "usage.aboutKeys.body":
+    "API-Schlüssel sind 1:1 mit Ihrer Wallet-Adresse als Ihrer Identität verknüpft. Das Trennen Ihrer Wallet schützt Ihre Schlüssel vor der Anzeige, ohne sie zu löschen.",
 
-  // ── CommandPalette ────────────────────────────────────────────────────
-  "commandPalette.placeholder": "Routen und Aktionen suchen...",
-  "commandPalette.noResults": "Keine Ergebnisse gefunden",
-  "commandPalette.selectHint": "Auswählen",
-  "commandPalette.navigateHint": "Navigieren",
-  "commandPalette.searchAction": "Suchen",
-  "commandPalette.searchActionDescription":
-    "Stellar-Adressen und -Transaktionen suchen",
-  "commandPalette.route.explorer.label": "Explorer",
-  "commandPalette.route.explorer.description":
-    "Durchsuchen Sie jedes Stellar-Konto oder blättern Sie durch aktuelle Transaktionen, live aktualisiert über ein GraphQL-Abonnement.",
-  "commandPalette.route.transactions.label": "Transaktionen",
-  "commandPalette.route.transactions.description":
-    "Jede indexierte Stellar-Transaktion, mit Filtern, gespeicherten Vorlagen und Cursor-Paginierung.",
-  "commandPalette.route.ledgers.label": "Ledgers",
-  "commandPalette.route.ledgers.description":
-    "Indexierte Stellar-Ledgers, neueste zuerst: Abschlusszeit, Transaktions- und Operationsanzahl sowie Lücken im Index.",
-  "commandPalette.route.search.label": "Suche",
-  "commandPalette.route.search.description":
-    "Memo-Suche über alle indexierten Transaktionen — Bestellreferenzen und Kurzcodes, sortiert nach der Trigramm-Ähnlichkeit des Backends.",
-  "commandPalette.route.events.label": "Vertragsereignisse",
-  "commandPalette.route.events.description":
-    "Von Lumina indexierte Soroban-Vertragsereignisse, filterbar nach Vertrags-ID.",
-  "commandPalette.route.assets.label": "Assets",
-  "commandPalette.route.assets.description":
-    "Jedes von Lumina indexierte Stellar-Asset — Angebots- und Inhaberzahlen, sortiert nach Inhabern oder Überweisungsvolumen.",
-  "commandPalette.route.graphql.label": "GraphQL",
-  "commandPalette.route.graphql.description":
-    "Führen Sie Abfragen gegen die Lumina GraphQL-API direkt im Browser aus, mit ausgearbeiteten Beispielen.",
-  "commandPalette.route.developers.label": "Entwickler",
-  "commandPalette.route.developers.description":
-    "API-Dokumentation, Getting-Started-Guide und Nutzungs-Dashboard für Entwickler, die mit Lumina arbeiten.",
-  "commandPalette.route.registry.label": "Registry",
-  "commandPalette.route.registry.description":
-    "Ein on-chain Soroban-Manifest der Verträge, die Lumina indexiert — registrieren Sie einen Vertrag, um in die Indizierung aufgenommen zu werden.",
-  "commandPalette.route.stats.label": "Statistiken",
-  "commandPalette.route.stats.description":
-    "Indexer-Status und Stellar-Netzwerk-Durchsatz: neuester Ledger, Transaktionsvolumen und die Mischung der Operationstypen.",
-  "commandPalette.route.watch.label": "Watchlist",
-  "commandPalette.route.watch.description":
-    "Verfolgen Sie Stellar-Adressen: ein Live-Feed der Aktivität über alles, was Sie beobachten, mit Alarmfiltern pro Adresse.",
+  // ── Code snippet ──────────────────────────────────────────────────────
+  "codeSnippet.copy": "Kopieren",
+  "codeSnippet.copied": "✓ Kopiert",
+  "codeSnippet.copiedAria": "Code kopiert",
+  "codeSnippet.copiedStatus": "Code in die Zwischenablage kopiert",
+  "codeSnippet.copyError":
+    "Zwischenablagenzugriff fehlgeschlagen. Markieren Sie den Code und kopieren Sie ihn manuell.",
 };
 
 export default de;

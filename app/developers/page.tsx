@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { routeMetadata } from "@/lib/metadata";
-import { features } from "@/lib/features";
+import { t } from "@/lib/i18n";
 
 export function generateMetadata(): Metadata {
   return routeMetadata({
     label: "Developer Portal",
-    description: "Lumina's developer documentation, API guides, and integration resources for building on Stellar.",
+    description:
+      "Lumina's developer documentation, API guides, and integration resources for building on Stellar.",
     path: "/developers",
   });
 }
@@ -16,11 +17,10 @@ export default function DevelopersPage() {
     <div className="max-w-[1160px] mx-auto px-4 sm:px-7 py-12">
       <div className="mb-12">
         <h1 className="text-4xl font-bold text-[var(--color-text-primary)] mb-4">
-          Lumina Developer Portal
+          {t("devPortal.heading")}
         </h1>
         <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl">
-          Everything you need to integrate Lumina's Stellar API into your application.
-          From your first query to production monitoring.
+          {t("devPortal.description")}
         </p>
       </div>
 
@@ -34,14 +34,13 @@ export default function DevelopersPage() {
             <div className="text-3xl">🚀</div>
             <div className="flex-1">
               <h2 className="text-xl font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent-fill)]">
-                Getting Started
+                {t("devPortal.gettingStarted.title")}
               </h2>
               <p className="text-sm text-[var(--color-text-secondary)] mt-2">
-                Step-by-step guide to making your first API request. Learn about authentication,
-                pagination, and error handling with copy-paste code examples.
+                {t("devPortal.gettingStarted.description")}
               </p>
               <div className="mt-4 text-sm font-semibold text-[var(--color-accent-fill)]">
-                Get started →
+                {t("devPortal.gettingStarted.cta")}
               </div>
             </div>
           </div>
@@ -56,14 +55,13 @@ export default function DevelopersPage() {
             <div className="text-3xl">📚</div>
             <div className="flex-1">
               <h2 className="text-xl font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent-fill)]">
-                API Documentation
+                {t("devPortal.apiDocs.title")}
               </h2>
               <p className="text-sm text-[var(--color-text-secondary)] mt-2">
-                Explore the GraphQL schema with worked examples you can run live.
-                Understand pagination patterns and error handling in depth.
+                {t("devPortal.apiDocs.description")}
               </p>
               <div className="mt-4 text-sm font-semibold text-[var(--color-accent-fill)]">
-                Explore docs →
+                {t("devPortal.apiDocs.cta")}
               </div>
             </div>
           </div>
@@ -78,14 +76,13 @@ export default function DevelopersPage() {
             <div className="text-3xl">⚙️</div>
             <div className="flex-1">
               <h2 className="text-xl font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent-fill)]">
-                Query Playground
+                {t("devPortal.playground.title")}
               </h2>
               <p className="text-sm text-[var(--color-text-secondary)] mt-2">
-                Write GraphQL queries and generate client code in JavaScript and Python.
-                Test your queries live against the real API.
+                {t("devPortal.playground.description")}
               </p>
               <div className="mt-4 text-sm font-semibold text-[var(--color-accent-fill)]">
-                Open playground →
+                {t("devPortal.playground.cta")}
               </div>
             </div>
           </div>
@@ -100,38 +97,34 @@ export default function DevelopersPage() {
             <div className="text-3xl">📊</div>
             <div className="flex-1">
               <h2 className="text-xl font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent-fill)]">
-                Usage Dashboard
+                {t("devPortal.usage.title")}
               </h2>
               <p className="text-sm text-[var(--color-text-secondary)] mt-2">
-                Monitor your API key usage and quota consumption.
-                See request counts and trends over time.
+                {t("devPortal.usage.description")}
               </p>
               <div className="mt-4 text-sm font-semibold text-[var(--color-accent-fill)]">
-                View dashboard →
+                {t("devPortal.usage.cta")}
               </div>
             </div>
           </div>
         </Link>
 
         {/* Webhooks Card */}
-        {features.webhooks.enabled && (
-          <Link
-            href="/developers/webhooks"
-            className="group p-6 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-raised)] hover:bg-[var(--color-bg-subtle)] transition-colors"
-          >
-            <div className="flex items-start gap-4">
-              <div className="text-3xl">🔔</div>
-              <div className="flex-1">
-                <h2 className="text-xl font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent-fill)]">
-                  Webhooks
-                </h2>
-                <p className="text-sm text-[var(--color-text-secondary)] mt-2">
-                  Register webhooks for real-time event notifications.
-                  Monitor delivery attempts and test your endpoints.
-                </p>
-                <div className="mt-4 text-sm font-semibold text-[var(--color-accent-fill)]">
-                  Manage webhooks →
-                </div>
+        <Link
+          href="/developers/webhooks"
+          className="group p-6 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-raised)] hover:bg-[var(--color-bg-subtle)] transition-colors"
+        >
+          <div className="flex items-start gap-4">
+            <div className="text-3xl">🔔</div>
+            <div className="flex-1">
+              <h2 className="text-xl font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent-fill)]">
+                {t("devPortal.webhooks.title")}
+              </h2>
+              <p className="text-sm text-[var(--color-text-secondary)] mt-2">
+                {t("devPortal.webhooks.description")}
+              </p>
+              <div className="mt-4 text-sm font-semibold text-[var(--color-accent-fill)]">
+                {t("devPortal.webhooks.cta")}
               </div>
             </div>
           </Link>
@@ -141,35 +134,44 @@ export default function DevelopersPage() {
       {/* Quick Start Section */}
       <div className="mt-12 p-8 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-subtle)]">
         <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-4">
-          Quick Start
+          {t("devPortal.quickStart.title")}
         </h2>
         <p className="text-[var(--color-text-secondary)] mb-6 max-w-2xl">
-          New to Lumina? Head over to our{" "}
+          {t("devPortal.quickStart.before")}{" "}
           <Link
             href="/developers/getting-started"
             className="text-[var(--color-accent-fill)] hover:underline font-semibold"
           >
-            getting started guide
-          </Link>
-          {" "}to learn the basics. You'll be querying the Stellar blockchain in minutes.
+            {t("devPortal.quickStart.link")}
+          </Link>{" "}
+          {t("devPortal.quickStart.after")}
         </p>
         <div className="grid md:grid-cols-3 gap-4">
           <div>
-            <div className="text-2xl font-bold text-[var(--color-accent-fill)] mb-2">1</div>
+            <div className="text-2xl font-bold text-[var(--color-accent-fill)] mb-2">
+              1
+            </div>
             <p className="text-sm text-[var(--color-text-secondary)]">
-              <strong>Make a request</strong> using our playground or your preferred language
+              <strong>{t("devPortal.step1.action")}</strong>{" "}
+              {t("devPortal.step1.rest")}
             </p>
           </div>
           <div>
-            <div className="text-2xl font-bold text-[var(--color-accent-fill)] mb-2">2</div>
+            <div className="text-2xl font-bold text-[var(--color-accent-fill)] mb-2">
+              2
+            </div>
             <p className="text-sm text-[var(--color-text-secondary)]">
-              <strong>Generate code</strong> in JavaScript or Python for your application
+              <strong>{t("devPortal.step2.action")}</strong>{" "}
+              {t("devPortal.step2.rest")}
             </p>
           </div>
           <div>
-            <div className="text-2xl font-bold text-[var(--color-accent-fill)] mb-2">3</div>
+            <div className="text-2xl font-bold text-[var(--color-accent-fill)] mb-2">
+              3
+            </div>
             <p className="text-sm text-[var(--color-text-secondary)]">
-              <strong>Monitor usage</strong> from your dashboard
+              <strong>{t("devPortal.step3.action")}</strong>{" "}
+              {t("devPortal.step3.rest")}
             </p>
           </div>
         </div>
